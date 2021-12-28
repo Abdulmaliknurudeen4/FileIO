@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Main main = new Main();
-        main.writeFileBufferredOffset();
+        main.writerFileWriter();
 
     }
 
@@ -102,4 +102,68 @@ public class Main {
                 bufferedOutputStream.close();
         }
     }
+
+    private void readFileReader() throws IOException{
+        //  Reads line by line
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try{
+            fileReader = new FileReader("myinputfile.txt");
+            bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while((line= bufferedReader.readLine())!=null){
+                System.out.println(line);
+            }
+        }finally {
+            if(bufferedReader!=null)
+                bufferedReader.close();
+            if (fileReader!=null)
+                fileReader.close();
+        }
+    }
+    private void readFileReaderChar() throws IOException{
+        //  Reads line by line
+        FileReader fileReader = null;
+        BufferedReader bufferedReader = null;
+        try{
+            fileReader = new FileReader("myinputfile.txt");
+            bufferedReader = new BufferedReader(fileReader);
+            int i;
+            while((i= bufferedReader.read())!=-1){
+                //  Read Character by character instead of line by line
+                System.out.print((char) i);
+            }
+        }finally {
+            if(bufferedReader!=null)
+                bufferedReader.close();
+            if (fileReader!=null)
+                fileReader.close();
+        }
+    }
+    private void writerFileWriter() throws IOException{
+        //  Reads line by line
+        FileWriter fileWriter = null;
+        BufferedWriter bufferedWriter = null;
+        try{
+            fileWriter = new FileWriter("output.txt");
+            bufferedWriter = new BufferedWriter(fileWriter);
+            String line1 = "AbdulMalik is going to Japan.";
+            String line2 = "Gafar is going to Saudi Arabia.";
+
+            //  Writes firstline
+            bufferedWriter.write(line1);
+            // Writes Carriage return
+            bufferedWriter.newLine();
+            bufferedWriter.write(line2);
+            //  flushes unput data unto the stream.
+            bufferedWriter.flush();
+
+        }finally {
+            if(bufferedWriter!=null)
+                bufferedWriter.close();
+            if (bufferedWriter!=null)
+                bufferedWriter.close();
+        }
+    }
+
 }
