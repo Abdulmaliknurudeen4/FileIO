@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Main main = new Main();
-        main.writeFileBufferred();
+        main.writeFileBufferredOffset();
 
     }
 
@@ -69,6 +69,29 @@ public class Main {
             byte[] strArray = str.getBytes();
 
             bufferedOutputStream.write(strArray);
+            bufferedOutputStream.flush();
+            System.out.println("SuccessFully written to the file" +
+                    "Please check the file for confirmation.");
+        }finally {
+            if (fileOutputStream != null)
+                fileOutputStream.close();
+            if (bufferedOutputStream != null)
+                bufferedOutputStream.close();
+        }
+    }
+    private void writeFileBufferredOffset() throws IOException {
+        FileOutputStream fileOutputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        try{
+            fileOutputStream = new FileOutputStream("output.txt");
+            bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+
+            String str = "Peter is going to India.";
+            byte[] strArray = str.getBytes();
+
+            //  write starting from postion 18 and write 5 character.
+            //  India
+            bufferedOutputStream.write(strArray, 18, 5);
             bufferedOutputStream.flush();
             System.out.println("SuccessFully written to the file" +
                     "Please check the file for confirmation.");
